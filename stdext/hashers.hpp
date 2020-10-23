@@ -16,7 +16,6 @@ namespace stdext
 
 		using hash_type = id_type;
 
-
 		inline hash_type value() { return h; }
 		operator hash_type() const { return h; }
 

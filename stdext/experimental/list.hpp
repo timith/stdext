@@ -11,6 +11,10 @@ namespace stdext
 		intrusive_list_enabled<value_type>* next = nullptr;
 	};
 
+	/**
+	 * @brief Intrusive list. This list is nonowning, it just arranges a collection of pointers to T.
+	 * @tparam T the type which the list manages
+	*/
 	template <typename T>
 	class intrusive_list
 	{
@@ -40,7 +44,9 @@ namespace stdext
 			{
 			}
 
-			iterator() = default;
+			iterator()
+			{
+			}
 
 			explicit operator bool() const
 			{
@@ -105,39 +111,14 @@ namespace stdext
 
 		};
 
-		reference front()
-		{
-			return *static_cast<value_type*>(head);
-		}
-
-		const_reference front()
-		{
-			return *static_cast<value_type*>(head);
-		}
-
-		reference back()
-		{
-			return *static_cast<value_type*>(tail);
-		}
-
-		const_reference back()
-		{
-			return *static_cast<value_type*>(tail);
-		}
-
 		iterator begin()
 		{
 			return iterator(head);
 		}
 
-		iterator rbegin()
-		{
-			return iterator(tail);
-		}
-
 		iterator end()
 		{
-			return iterator();
+			return iterator(tail);
 		}
 
 		iterator erase(iterator itr)
