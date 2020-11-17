@@ -51,25 +51,18 @@ namespace stdext
 
 		using hash_type = id_type;
 
-		explicit fnv1_hasher(hash_type h_)
+		explicit constexpr fnv1_hasher(hash_type h_) noexcept
 			: h(h_)
 		{
 		}
 
-		fnv1_hasher()
+		constexpr fnv1_hasher() noexcept
 			: h(traits_type::offset)
 		{
 		}
 
 		template<typename value_type_>
-		inline void hash(value_type_ value)
-		{
-			for (int i = 0; i < sizeof(value_type_); i++)
-				hash(static_cast<uint8_t*>(&value)[i]);
-		}
-
-		template<typename value_type_>
-		typename std::enable_if<std::is_arithmetic<value_type_>::value, void>::type hash(value_type_ value)
+		constexpr typename std::enable_if<std::is_arithmetic<value_type_>::value, void>::type hash(value_type_ value) noexcept
 		{
 			h = (h * traits_type::prime) ^ static_cast<hash_type>(value);
 		}
@@ -85,25 +78,18 @@ namespace stdext
 
 		using hash_type = id_type;
 
-		explicit fnv1a_hasher(hash_type h_)
+		explicit constexpr fnv1a_hasher(hash_type h_) noexcept
 			: h(h_)
 		{
 		}
 
-		fnv1a_hasher()
+		constexpr fnv1a_hasher() noexcept
 			: h(traits_type::offset)
 		{
 		}
 
 		template<typename value_type_>
-		inline void hash(value_type_ value)
-		{
-			for (int i = 0; i < sizeof(value_type_); i++)
-				hash(static_cast<uint8_t*>(&value)[i]);
-		}
-
-		template<typename value_type_>
-		typename std::enable_if<std::is_arithmetic<value_type_>::value, void>::type hash(value_type_ value)
+		constexpr typename std::enable_if<std::is_arithmetic<value_type_>::value, void>::type hash(value_type_ value) noexcept
 		{
 			h = (h ^ static_cast<hash_type>(value)) * traits_type::prime;
 		}
